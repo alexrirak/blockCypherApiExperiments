@@ -10,7 +10,7 @@ Fill in your api key and run :)
 '''
 
 # The API key for BlockCypher
-api_key = '405dbb2fb260460e99d9c37c6a5fc5c2'
+api_key = ***YOUR API KEY***
 # Whether to wait for transactions confirmations or not (it takes 5-6 min per transaction)
 wait_for_transactions = True
 
