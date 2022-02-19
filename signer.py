@@ -10,7 +10,7 @@ Fill in your api key and run :)
 '''
 
 # The API key for BlockCypher
-api_key = '***YOUR API KEY***'
+api_key = '405dbb2fb260460e99d9c37c6a5fc5c2'
 # Whether to wait for transactions confirmations or not (it takes 5-6 min per transaction)
 wait_for_transactions = True
 
@@ -23,6 +23,9 @@ def printBalances(wallet1, wallet2, api_key: str) -> None:
     :param api_key: the blockcypher api key
     :return:
     '''
+
+    # sleep for half a sec to slow us down cause of rate limiting
+    time.sleep(0.5)
 
     print("\n###################################")
 
@@ -136,8 +139,6 @@ if __name__ == '__main__':
     print("Funding Transaction in Block Explorer: https://live.blockcypher.com/bcy/tx/{}".format(fundingTxn['tx_ref']))
 
     if (wait_for_transactions):
-        # sleep for half a sec to slow us down cause of rate limiting
-        time.sleep(0.5)
         printBalances(wallet1, wallet2, api_key)
         waitForTxn(fundingTxn['tx_ref'], api_key)
 
@@ -156,8 +157,6 @@ if __name__ == '__main__':
     print("Transaction in Block Explorer: https://live.blockcypher.com/bcy/tx/{}".format(transaction))
 
     if (wait_for_transactions):
-        # sleep for half a sec to slow us down cause of rate limiting
-        time.sleep(0.5)
         printBalances(wallet1, wallet2, api_key)
         waitForTxn(transaction, api_key)
 
