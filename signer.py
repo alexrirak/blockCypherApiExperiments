@@ -10,7 +10,7 @@ Fill in your api key and run :)
 '''
 
 # The API key for BlockCypher
-api_key = ***YOUR API KEY***
+api_key = '***YOUR API KEY***'
 # Whether to wait for transactions confirmations or not (it takes 5-6 min per transaction)
 wait_for_transactions = True
 
@@ -98,7 +98,7 @@ def waitForTxn(transactionId: str, api_key: str) -> None:
         startTime = time.time()
         while(transactionDetails['confirmations'] < 6):
             time.sleep(20)
-            print("....", end='')
+            print("Txn has {} confirmations, waiting for 6...".format(transactionDetails['confirmations']))
             transactionDetails = blockcypher.get_transaction_details(transactionId, coin_symbol='bcy', api_key=api_key)
             if (time.time() - startTime > 600):
                 print("Txn has not been confirmed in ten min, giving up")
@@ -136,6 +136,8 @@ if __name__ == '__main__':
     print("Funding Transaction in Block Explorer: https://live.blockcypher.com/bcy/tx/{}".format(fundingTxn['tx_ref']))
 
     if (wait_for_transactions):
+        # sleep for half a sec to slow us down cause of rate limiting
+        time.sleep(0.5)
         printBalances(wallet1, wallet2, api_key)
         waitForTxn(fundingTxn['tx_ref'], api_key)
 
@@ -154,6 +156,8 @@ if __name__ == '__main__':
     print("Transaction in Block Explorer: https://live.blockcypher.com/bcy/tx/{}".format(transaction))
 
     if (wait_for_transactions):
+        # sleep for half a sec to slow us down cause of rate limiting
+        time.sleep(0.5)
         printBalances(wallet1, wallet2, api_key)
         waitForTxn(transaction, api_key)
 
